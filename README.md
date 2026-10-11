@@ -38,7 +38,13 @@ Dataset `Price range` values are ordinal levels (typically 1–4), not currency 
 
 The implementation splits comma-separated cuisines into categories, encodes them with `MultiLabelBinarizer`, scales the ordinal price range, then ranks restaurant feature vectors against the preference vector with cosine similarity. Cuisine and price contribute 80% and 20% of the feature weight by default. These are transparent, tunable design choices rather than weights learned from user feedback.
 
-A sample quality check on the supplied 9,551-row CSV used Japanese and Seafood preferences with price level 3. All 5 returned restaurants included at least one requested cuisine (100% cuisine overlap), and the average absolute difference from the requested price level was 0.20. A separate Italian/price-level-2 run returned five Italian restaurants at price level 2. These checks measure preference alignment, not real-world user satisfaction; the dataset has no user interaction or relevance labels for offline ranking metrics.
+Run the reproducible sample checks with:
+
+```bash
+python evaluate.py --dataset "data/Dataset .csv"
+```
+
+On the supplied 9,551-row CSV, Japanese/Seafood at price level 3 produced 5/5 results sharing at least one requested cuisine and a mean absolute price-level difference of 0.20. Italian at price level 2 produced 5/5 Italian results at price level 2. These checks measure preference alignment, not real-world user satisfaction; the dataset has no user interaction or relevance labels for offline ranking metrics.
 
 ## Files
 
